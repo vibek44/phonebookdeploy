@@ -1,6 +1,6 @@
 require('dotenv').config()
 const mongoose=require('mongoose')
-const {errorHandler} =require ('../utilities/ErrorHandler')
+
 
 const url = process.env.MONGODB_URI
 mongoose.set('strictQuery', false)
