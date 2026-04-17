@@ -6,7 +6,7 @@ personsRouter.get('/persons',(req,res,next)=>{
     Contact.find({})
     .then(result=>res.json(result))
     .catch(error=>next(error))
- })
+})
  
 personsRouter.get('/persons/:id',(req,res,next)=>{
     Contact.findById(req.params.id)
@@ -35,10 +35,7 @@ personsRouter.post('/persons',(req,res,next)=>{
     .then(result=>{
         res.status(201).json(result)
     })
-    .catch(error=>{
-       next(error)
-    })
-     
+    .catch(error=>next(error))  
 })
  
 personsRouter.delete('/persons/:id', (req,res,next)=>{
@@ -48,24 +45,24 @@ personsRouter.delete('/persons/:id', (req,res,next)=>{
     })
     .catch(error=>{
         next(error)
-     })
+    })
 })
  
- personsRouter.put('/persons/:id', (req, res,next)=>{
-      const body=req.body
-       Contact.findById(req.params.id)
-       .then( result=>{
-           if(!result){
-             return res.status(404).end()
-           }
-         result.number=body.number
-         result.save()
-         .then(result=>{
-            res.json(result) 
-         })
-         .catch(error=>next(error))
-       })    
- })
+personsRouter.put('/persons/:id', (req, res,next)=>{
+    const body=req.body
+    Contact.findById(req.params.id)
+    .then( result=>{
+        if(!result){
+            return res.status(404).end()
+        }
+        result.number=body.number
+        result.save()
+        .then(result=>{
+           res.json(result) 
+        })
+        .catch(error=>next(error))
+    })    
+})
 
 
 infoRouter.get('/info',(req,res)=>{
