@@ -1,7 +1,6 @@
 require('dotenv').config()
 const mongoose=require('mongoose')
 
-
 const url = process.env.MONGODB_URI
 mongoose.set('strictQuery', false)
 mongoose.connect(url, { family:4 })
@@ -9,7 +8,7 @@ mongoose.connect(url, { family:4 })
        console.log('connected')
    })
    .catch(error=>{
-        console.log(`error coneecting : ${error.errmsg}`) 
+        console.log(`error conecting...`) 
    })
 
 const contactSchema=new mongoose.Schema({
@@ -17,13 +16,20 @@ const contactSchema=new mongoose.Schema({
        type:String,
        required:true,
        unique:true,
-       minLength:5
+       minLength:[3,' length should be atleast three charactor long']
     },
     number:{
-       type:String,
-       required:true,
-       minLength:10
+        type:String,
+        required:true,
+        minLength:[8, ' should be atleast eight digit long'],
+        validate:{
+            validator:function(v){
+                return /\d{2,3}-\d{7,8}/.test(v) && v.split('-')[0].length<4 && v.split('-')[1].length<8
+            },
+            message:props=>`${props.value} is not a valid phone number`          
+        }
     }
+
 })
 
 contactSchema.set('toJSON', {
