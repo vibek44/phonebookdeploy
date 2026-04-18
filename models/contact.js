@@ -24,7 +24,7 @@ const contactSchema=new mongoose.Schema({
         minLength:[8, ' should be atleast eight digit long'],
         validate:{
             validator:function(v){
-                return /\d{2,3}-\d{7,8}/.test(v) && v.split('-')[0].length<4 && v.split('-')[1].length<8
+                return /\d{2,3}-\d{7,8}/.test(v) && v.split('-')[0].length<4 && v.split('-')[1].length<9
             },
             message:props=>`${props.value} is not a valid phone number`          
         }
