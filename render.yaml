@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: my-instant-app
+    name: contactbuk
     runtime: node
     plan: free
     buildCommand: npm install
